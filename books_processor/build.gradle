@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.chumak'
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+configurations {
+    configureEach {
+        exclude module: 'netty-transport-native-kqueue'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.spark:spark-core_2.13:3.4.0'
+    implementation 'org.apache.spark:spark-mllib_2.13:3.4.0'
+    implementation 'org.scala-lang:scala-library:2.12.15'
+}
+
+test {
+    useJUnitPlatform()
+}
